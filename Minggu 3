@@ -1,0 +1,52 @@
+Untuk membuat matriks insiden berdasarkan dokumen-dokumen dan query-query yang diberikan, kita perlu menentukan bagaimana kita akan merepresentasikan matriks insiden. Biasanya, kita akan menggunakan matriks biner di mana baris-baris mewakili dokumen-dokumen, dan kolom-kolom mewakili kata-kata kunci atau istilah dalam query dan dokumen-dokumen tersebut.
+
+Berikut adalah representasi matriks insiden untuk dokumen-dokumen dan query-query yang diberikan:
+
+```
+            Home  Sales  July  New
+Doc 1       1     1      0     1
+Doc 2       1     1      1     0
+Doc 3       1     1      1     0
+Doc 4       1     1      1     1
+```
+
+Dalam matriks di atas, setiap baris mewakili dokumen, dan setiap kolom mewakili kata kunci atau istilah dalam query atau dokumen. Jika kata kunci muncul dalam dokumen, maka nilai dalam sel tersebut adalah 1, jika tidak, maka nilai adalah 0.
+
+Sekarang, kita bisa menggunakan matriks insiden ini untuk mengevaluasi query-query boolean yang diberikan:
+
+1. `Home AND Sales AND NOT July`:
+
+   Kita ingin mengambil dokumen-dokumen yang mengandung "Home" dan "Sales" tetapi tidak mengandung "July". Kita bisa menggunakan operasi logika untuk menghitung hasilnya:
+
+   ```
+   (Home) AND (Sales) AND NOT (July)
+   ```
+
+   Kita bisa menghitung hasilnya dengan menggabungkan nilai-nilai matriks insiden untuk masing-masing kata kunci:
+
+   ```
+   (1 AND 1) AND NOT (0) = 1 AND 1 = 1
+   ```
+
+   Jadi, hasil dari query ini adalah Dokumen 1.
+
+2. `Home AND July AND NOT Sales`:
+
+   Kita ingin mengambil dokumen-dokumen yang mengandung "Home" dan "July" tetapi tidak mengandung "Sales". Kita bisa menggunakan operasi logika untuk menghitung hasilnya:
+
+   ```
+   (Home) AND (July) AND NOT (Sales)
+   ```
+
+   Kita bisa menghitung hasilnya dengan menggabungkan nilai-nilai matriks insiden untuk masing-masing kata kunci:
+
+   ```
+   (1 AND 1) AND NOT (1) = 1 AND 0 = 0
+   ```
+
+   Jadi, hasil dari query ini adalah tidak ada dokumen yang sesuai.
+
+Jadi, hasil boolean query retrieval berdasarkan matriks insiden di atas adalah sebagai berikut:
+
+1. `Home AND Sales AND NOT July` menghasilkan Dokumen 1.
+2. `Home AND July AND NOT Sales` tidak menghasilkan dokumen apa pun.
